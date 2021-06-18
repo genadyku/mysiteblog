@@ -1,0 +1,69 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb",
+    "prettier",
+    "plugin:jsx-a11y/recommended"
+    
+  ],
+  "plugins": [
+    "react",
+    "prettier",
+    "jsx-a11y",
+    "import"
+    
+   
+  ],
+  "rules": {
+    "no-console": 0,
+    "react/prop-types": 0,
+    "react/prefer-stateless-function": 0,
+    "comma-dangle": 0,
+    "no-underscore-dangle": 0,
+    "camelcase": 0,
+    "prefer-destructuring": 0,
+    "class-methods-use-this":  0,
+    "no-shadow": 0,
+    "no-restricted-globals": 0,
+    "func-names": 0,
+    "react/no-danger" : 0,
+    "consistent-return":0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "prettier/prettier": [
+      "error",
+      {
+           "printWidth":80,
+           "trailingComma":"es5",
+           "semi":false,
+           "jsxSingleQuote":true,
+           "singleQuote":true,
+           "useTabs":true,
+           "endOfLine": "auto"
+      }
+      
+    ],
+    "jsx-a11y/no-noninteractive-element-interactions": [
+      "error",
+      {
+        "handlers": [
+          "onClick",
+          "onMouseDown",
+          "onMouseUp",
+          "onKeyPress",
+          "onKeyDown",
+          "onKeyUp"
+        ]
+      }
+    ],
+    "react/destructuring-assignment": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-props-no-spreading": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "import/no-extraneous-dependencies": 0,
+    "jsx-a11y/label-has-for": 0,
+    "import/prefer-default-export": 0,
+    "no-param-reassign": 0,
+    "react-hooks/exhaustive-deps": "warn"
+    
+  }
+}
