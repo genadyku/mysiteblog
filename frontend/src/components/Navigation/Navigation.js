@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import SearchBox from '../commons/SearchBox'
+import NavDropdown from '../commons/NavDropdown'
 
 import { logout } from '../../ducks/auth'
 
@@ -35,7 +36,23 @@ const Navigation = ({ isAuthenticated, name, logout }) => (
 						React
 					</Link>
 				)}
+
+				<NavDropdown name='Добавить'>
+					<Link className='dropdown-item' to='/addArticle'>
+						Добавить статью
+					</Link>
+					<Link className='dropdown-item' to='/editArticles'>
+						Редактировать статьи
+					</Link>
+					<Link className='dropdown-item' to='/addArticle'>
+						Добавить статью о REACT
+					</Link>
+					<Link className='dropdown-item' to='/addLesson'>
+						Добавить урок
+					</Link>
+				</NavDropdown>
 			</ul>
+
 			<ul className='navbar-nav navbar-right '>
 				<Route render={({ history }) => <SearchBox history={history} />} />
 				{isAuthenticated && <li className='list-name'>{name} </li>}

@@ -16,19 +16,12 @@ const reset = async (resetPasswordToken, newPassword) => {
   try {
   
 
-  console.log('0-1:',newPassword)
+ 
   const decoded = jwt.verify(resetPasswordToken, process.env.SECRET);
-   console.log('0-2:',decoded.data)
+  
    const currentUser = await User.findById(decoded.data);
-    console.log('0-3:',currentUser )
-   // const salt = bcryptjs.genSaltSync(10);
-
-   // const passwordnew = bcryptjs.hashSync(newPassword, salt);
-   // console.log('0-4:',passwordnew  )
-    const UserUpdate = await User.findOneAndUpdate({_id: currentUser._id, }, { $set: { password : newPassword } } );
-    console.log('0-5:' )
-    console.log('0-6:',UserUpdate )
-   
+   const UserUpdate = await User.findOneAndUpdate({_id: currentUser._id, }, { $set: { password : newPassword } } );
+      
   } catch (error) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed');
   }

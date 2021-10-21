@@ -34,7 +34,7 @@ const getChapterSlug = catchAsync(async (req, res, next) => {
 
 const getLessons = catchAsync(async (req, res, next) => {
   const lessons = await Chapter.find({}).populate('lessons').exec();
-
+  
   res.json(lessons);
 });
 
@@ -50,10 +50,36 @@ const getLesson = catchAsync(async (req, res, next) => {
   res.status(200).json(lesson);
 });
 
+const  addLesson = catchAsync(async (req, res, next)=> {
+  const { chapterId, num, slug, title, titleShort, textf } = req.body;
+  
+  let chapter;
+  
+    const foundLesson = await Lesson.findOne({ slug: slug });
+    if (foundLesson) {
+      return next(new AppError('Урок с таким названием уже существует.', 404));
+    }
+
+    
+    const newLesson = new Lesson({ chapterId, num, slug, title, titleShort, textf });
+     await newLesson.save();
+     chapter = await Chapter.findById({ "_id": chapterId }).exec();
+     chapter.lessons.push(newLesson);
+      await chapter.save();
+    
+    res.status(200).json({
+      status: 'success',
+      data: {
+        newLesson ,
+      },
+    });
+  });   
+
 module.exports = {
   getChapters,
   getChapter,
   getChapterSlug,
   getLessons,
   getLesson,
+  addLesson
 };

@@ -1,0 +1,6 @@
+<pre class='language-javascript line-numbers'>
+<code>\n
+const things = [\n'Playground',\n'Strategy',\n]\n 
+function add(num1 ,num2 ){\n return num1 +num2 \n} </code></pre>
+
+Когда JavaScript создавался, у него было другое имя – «LiveScript». Однако, язык Java был очень популярен в то время, и было решено, что позиционирование JavaScript как «младшего брата» Java будет полезно.JavaScript стал полностью независимым языком.Написать Javascript в HTML <p>  Код Javascript может быть написать внутри HTML, точнее он может быть написан в теге script: </p> <p>Теги script могут быть расположены в теге <head> или в теге <body>, для начала рассмотрим простой пример ниже:</p> <p>Создайте файл helloworld.html с содержанием:  </p><pre class='language-javascript line-numbers'><code>&lt;!DOCTYPE html><br>&lt;html><br>   &lt;head><br>      &lt;title>Hello Javascript&lt;/title><br>      &lt;script type = \"text/javascript\"><br> function sayHello()  {<br>  alert(\"Hello Everyone!\");<br>}<br> &lt;/script><br> &lt;/head><br> &lt;body><br>    &lt;button onclick=\"sayHello()\">Click me!&lt;/button><br> &lt;/body><br></html><br></code></pre>

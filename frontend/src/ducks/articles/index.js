@@ -1,4 +1,5 @@
 import { take, call, put, all } from 'redux-saga/effects'
+import { push } from 'connected-react-router'
 import axios from 'axios'
 
 export const moduleName = 'articles'
@@ -11,6 +12,18 @@ export const FETCH_ARTICLE_FAILURE = `FETCH_ARTICLE_FAILURE`
 export const FETCH_ARTICLES = `FETCH_ARTICLES`
 export const FETCH_ARTICLES_SUCCESS = `FETCH_ARTICLES_SUCCESS`
 export const FETCH_ARTICLES_FAILURE = `FETCH_ARTICLES_FAILURE`
+
+export const ADD_ARTICLE_REQUEST = `ADD_ARTICLE_REQUEST`
+export const ADD_ARTICLE_SUCCESS = `ADD_ARTICLE_SUCCESS`
+export const ADD_ARTICLE_FAILURE = `ADD_ARTICLE_FAILURE`
+
+export const DELETE_ARTICLE_REQUEST = `DELETE_ARTICLE_REQUEST`
+export const DELETE_ARTICLE_SUCCESS = `DELETE_ARTICLE_SUCCESS`
+export const DELETE_ARTICLE_FAILURE = `DELETE_ARTICLE_FAILURE`
+
+export const UPDATE_ARTICLE_REQUEST = `UPDATE_ARTICLE_REQUEST`
+export const UPDATE_ARTICLE_SUCCESS = `UPDATE_ARTICLE_SUCCESS`
+export const UPDATE_ARTICLE_FAILURE = `UPDATE_ARTICLE_FAILURE`
 
 const INITIAL_STATE = {
 	posts: [],
@@ -67,6 +80,30 @@ export default function reducer(state = INITIAL_STATE, action) {
 				loading: false,
 			}
 
+		case UPDATE_ARTICLE_SUCCESS:
+			return {
+				...state,
+				post: payload.data.post,
+				error: null,
+				loading: false,
+			}
+
+		case DELETE_ARTICLE_REQUEST:
+			return {
+				...state,
+				posts: state.posts.filter((post) => post._id !== payload),
+				error: null,
+				loading: false,
+			}
+		case DELETE_ARTICLE_FAILURE:
+			error = payload
+			return {
+				...state,
+				posts: null,
+				error,
+				loading: false,
+			}
+
 		default:
 			return state
 	}
@@ -85,10 +122,37 @@ export function fetchArticleId(slug) {
 	}
 }
 
+export function fetchArticleUpd(slugg) {
+	return {
+		type: FETCH_ARTICLE,
+		payload: { slugg },
+	}
+}
 export const fetchAllArticles = function (keyword) {
 	return {
 		type: FETCH_ARTICLES,
 		payload: { keyword },
+	}
+}
+
+export const addArticle = function (data) {
+	return {
+		type: ADD_ARTICLE_REQUEST,
+		payload: data,
+	}
+}
+
+export const deleteArticle = function (id) {
+	return {
+		type: DELETE_ARTICLE_REQUEST,
+		payload: id,
+	}
+}
+
+export const updateArticle = function (data) {
+	return {
+		type: UPDATE_ARTICLE_REQUEST,
+		payload: data,
 	}
 }
 
@@ -153,7 +217,6 @@ export const fetchArticleIdSaga = function* () {
 		try {
 			const action = yield take(FETCH_ARTICLE)
 			const resp = yield call(fetchArticle, action.payload.slug)
-
 			yield put(fetchArticleIdSuccess(resp.data))
 		} catch (err) {
 			yield put({ type: FETCH_ARTICLE_FAILURE, payload: err.response.data })
@@ -161,6 +224,73 @@ export const fetchArticleIdSaga = function* () {
 	}
 }
 
+export const addArticleSaga = function* () {
+	while (true) {
+		const action = yield take(ADD_ARTICLE_REQUEST)
+
+		try {
+			const response = yield axios.post(`/api/addarticle`, action.payload)
+
+			yield put({
+				type: ADD_ARTICLE_SUCCESS,
+				payload: { response },
+			})
+
+			yield put(push('/articles'))
+		} catch (err) {
+			yield put({ type: ADD_ARTICLE_FAILURE, payload: err.response })
+		}
+	}
+}
+
+export const deleteArticleSaga = function* () {
+	while (true) {
+		const action = yield take(DELETE_ARTICLE_REQUEST)
+
+		try {
+			const response = yield axios.post(`/api/deletearticle/${action.payload}`)
+
+			yield put({
+				type: DELETE_ARTICLE_SUCCESS,
+				payload: {
+					response,
+				},
+			})
+
+			yield put(push('/editArticles'))
+		} catch (err) {
+			yield put({ type: DELETE_ARTICLE_FAILURE, payload: err.response })
+		}
+	}
+}
+
+export const updateArticleSaga = function* () {
+	while (true) {
+		const action = yield take(UPDATE_ARTICLE_REQUEST)
+
+		try {
+			const response = yield axios.put(
+				`/api/updatearticle/${action.payload._id}`,
+				action.payload
+			)
+
+			yield put({
+				type: UPDATE_ARTICLE_SUCCESS,
+				payload: response.data,
+			})
+
+			yield put(push(`/article/${action.payload.slug}`))
+		} catch (err) {
+			yield put({ type: UPDATE_ARTICLE_FAILURE, payload: err.response })
+		}
+	}
+}
 export function* saga() {
-	yield all([fetchArticlesSaga(), fetchArticleIdSaga()])
+	yield all([
+		fetchArticlesSaga(),
+		fetchArticleIdSaga(),
+		addArticleSaga(),
+		deleteArticleSaga(),
+		updateArticleSaga(),
+	])
 }

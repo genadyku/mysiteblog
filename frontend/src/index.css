@@ -1,5 +1,10 @@
+html{
+   position: relative;
+   min-height: 100%;
+}
+
 body {
-  margin: 0;
+  margin-bottom: 60px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -14,6 +19,7 @@ code {
 
 .header {
  padding-top: 40px;
+ margin-right:40px; 
 
 }
 li {
@@ -74,17 +80,19 @@ li {
 }
 .sidebar {
   margin: 0 2rem 0 0;
+  
 }
 
 .sidebar-inner {
   overflow: auto;
   max-height: 100%;
-  margin: 0 80px 0 -20px;
+  margin-left: -10px;
+  background: #ece7e5;
 }
 .sidebar-content {
   padding: 23px 0;
   font-size: 14px;
-  background: #f5f2f0;
+  
   min-height: calc(100vh - 50px);
 }
 .sidebar-nav-links {
@@ -100,6 +108,13 @@ li {
 }
 .sidebar-nav-link a {
   color: #333;
+}
+
+
+.title-lesson {
+  padding-top:  50px;
+  width:  800px;
+
 }
 .list-sub a {
   color: #333;
@@ -135,3 +150,77 @@ li {
   color: rgb(246, 238, 238);
 }
 
+/*
+textarea {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+*/
+.preview {
+  
+  border: 1px solid #0a92bb;
+  
+}
+
+.nav-item  dropdown-item {
+
+ display: none;
+
+}
+select {
+ width: 100%;
+ padding:5px;
+ border-color: blue;
+}
+
+
+.add-article label {
+  font-weight: bold;
+ 
+
+}
+.help-block{
+  font-weight: bold;
+  color: rgb(218, 15, 15);
+
+}
+.footer{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 60px;
+  background-color: #17a2b8;
+ }
+ .copyright {
+  margin: 20px 20px 20px 20px ; 
+  color: #fff;
+  text-align: right;
+  display: block;
+  font-size: 13px;
+  line-height: 15px;
+}
+.btnedit{
+ color:white;
+ display: inline-flex;
+ justify-content: center; 
+ align-items: center;
+ width: 30px;
+ height:30px; 
+ margin: -6px 16px;
+}
+.commit {
+  padding: 20px;
+
+}
+.edit {
+
+  background:chocolate
+}
+.delete {
+  background: red;
+}
+.code-view {
+ width:  500px;
+
+}

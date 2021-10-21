@@ -56,6 +56,31 @@ export default function reducer(state = initialState, action) {
 	let error
 	const { type, payload } = action
 	switch (type) {
+		case CHAPTERS_REQUEST:
+			return {
+				...state,
+				lessons: {
+					chapters: [],
+					loading: true,
+					error: null,
+				},
+			}
+		case CHAPTERS_SUCCESS:
+			console.log('red1', action.payload)
+			return {
+				...state,
+				lessons: {
+					chapters: action.payload,
+					loading: false,
+					error: null,
+				},
+			}
+		case CHAPTERS_FAILURE:
+			return {
+				...state,
+				error: { message: action.payload.data.message },
+			}
+
 		case LESSONS_REQUEST:
 			return {
 				...state,
@@ -171,18 +196,6 @@ export default function reducer(state = initialState, action) {
 				error: { message: action.payload.data.message },
 			}
 
-		case ADD_LESSON_REQUEST:
-			return {
-				...state,
-
-				loading: true,
-			}
-		case ADD_LESSON_SUCCESS:
-			return {
-				...state,
-
-				lesson: { lesson: action.payload, loading: false, error: null },
-			}
 		case ADD_LESSON_FAILURE:
 			return {
 				...state,
@@ -366,10 +379,7 @@ export const addChapterSaga = function* () {
 		const action = yield take(ADD_CHAPTERS_REQUEST)
 
 		try {
-			const response = yield axios.post(
-				'http://localhost:4001/api/addchapter',
-				action.payload
-			)
+			const response = yield axios.post('/api/addchapter', action.payload)
 
 			yield put({
 				type: ADD_CHAPTERS_SUCCESS,
@@ -388,10 +398,7 @@ export const addLessonSaga = function* () {
 		const action = yield take(ADD_LESSON_REQUEST)
 
 		try {
-			const response = yield axios.post(
-				'http://localhost:4001/api/addlesson',
-				action.payload
-			)
+			const response = yield axios.post('/api/addlesson', action.payload)
 			console.log('reduc add2')
 			yield put({
 				type: ADD_LESSON_SUCCESS,
@@ -429,7 +436,7 @@ export const deleteLessonSaga = function* () {
 
 export const fetchChapters = () =>
 	axios
-		.get('http://localhost:4001/api/chapter', {
+		.get('/api/chapter', {
 			headers: [],
 		})
 		.then((response) => response.data)
@@ -518,6 +525,7 @@ export const fetchChaptersSaga = function* () {
 		try {
 			yield take(CHAPTERS_REQUEST)
 			const resp = yield call(fetchChapters)
+			console.log('CHAPTERS_REQUEST', resp)
 			yield put(fetchChaptersSuccess(resp))
 		} catch (error) {
 			yield put({ type: CHAPTERS_FAILURE, payload: error })

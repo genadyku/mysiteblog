@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import ChaptersList from './ChaptersList'
+import ChapterList from './ChapterList'
 
 import spinner from '../../spinner.gif'
 
@@ -9,16 +9,17 @@ import { fetchAllLessons } from '../../../ducks/lesson'
 const ChaptersPage = ({ lessons: { lessons, loading }, fetchAllLessons }) => {
 	useEffect(() => {
 		fetchAllLessons()
+		console.log('less-fenth:')
 	}, [fetchAllLessons])
 
-	return loading && lessons ? (
+	return loading && lessons && lessons.length > 0 ? (
 		<section>
 			<div className='container'>
 				<div className='row'>
 					<div className='lesson-content'>
 						<h4>Язык программирования JavaScript</h4>
 						<div className='frontpage-content__part'>Часть первая</div>
-						<ChaptersList lessons={lessons} />
+						<ChapterList lessons={lessons} />
 					</div>
 				</div>
 			</div>

@@ -8,8 +8,7 @@ const styles = {
 
 class ResetPasswordPage extends Component {
 	componentDidMount() {
-		const { token } = this.props.match.params
-		console.log('000-1', token)
+		//	const { token } = this.props.match.params
 	}
 
 	render() {

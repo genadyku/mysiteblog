@@ -19,7 +19,6 @@ class ForgotForm extends Component {
 	}
 
 	onSubmit(values) {
-		console.log('forg:', values)
 		this.props.forgot(values)
 	}
 
@@ -27,7 +26,7 @@ class ForgotForm extends Component {
 		const { handleSubmit, submitting } = this.props
 
 		const { error } = this.props.errorMessage
-		console.log('1-1', error)
+
 		return (
 			<div className='container'>
 				<form onSubmit={handleSubmit(this.onSubmit)}>

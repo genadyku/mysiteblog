@@ -17,7 +17,7 @@ const AppLessonsPage = ({
 		fetchTitleLessons(slug)
 	}, [fetchTitleLessons, slug])
 
-	return loading && title ? (
+	return loading && title._id ? (
 		<div className='container-fluid'>
 			<div className='row'>
 				<div className='col col-lg-2'>

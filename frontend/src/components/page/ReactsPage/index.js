@@ -16,8 +16,6 @@ const ReactsPage = ({
 		fetchAllArticlesReact()
 	}, [fetchAllArticlesReact])
 
-	console.log('1')
-	console.log('loading:', loading)
 	return (
 		<>
 			{loading ? (

@@ -20,7 +20,7 @@ const ArticlesPage = ({ articles: { posts, loading }, fetchAllArticles }) => {
 		</div>
 	) : (
 		<section>
-			<div className='container header'>
+			<div className='container '>
 				<ArticleList articles={posts} />
 			</div>
 		</section>

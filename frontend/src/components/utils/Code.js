@@ -7,11 +7,16 @@ const Code = ({ text }) => {
 		Prism.highlightAll()
 	}, [])
 
+	let text1
+	if (typeof text !== 'undefined') {
+		text1 = text.replace(/<br>/g, '\n')
+	}
+
 	const createMarkup = (text) => ({ __html: text })
 
 	return (
 		<div>
-			<div dangerouslySetInnerHTML={createMarkup(text)} />
+			<div dangerouslySetInnerHTML={createMarkup(text1)} />
 		</div>
 	)
 }

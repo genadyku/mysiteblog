@@ -6,7 +6,7 @@ const ReactArticleItem = ({ article }) => (
 	<>
 		<div className='row header'>
 			<div className='col-lg-2'>
-				<Link to={`article/${article.slug}`}>
+				<Link to={`react/${article.slug}`}>
 					<img
 						className='img-logo'
 						src={getImageByKey(article.type)}

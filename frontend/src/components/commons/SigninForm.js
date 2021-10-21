@@ -23,7 +23,6 @@ class SigninForm extends Component {
 
 	render() {
 		const error = this.props.errorMessage
-		// const error = errorMessage;
 		const { handleSubmit } = this.props
 
 		return (

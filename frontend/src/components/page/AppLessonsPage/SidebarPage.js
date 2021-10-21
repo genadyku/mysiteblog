@@ -14,5 +14,4 @@ const SidebarPage = ({ chapter_id, chapter_slug, chapter1 }) => (
 		</div>
 	</div>
 )
-
 export default SidebarPage

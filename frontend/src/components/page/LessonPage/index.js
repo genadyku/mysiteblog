@@ -30,7 +30,7 @@ const LessonPage = ({
 						chapter1={lesson.chapterId.chapter1}
 					/>
 				</div>
-				<div className='col col-lg-10'>
+				<div className='col col-lg-8'>
 					<div className='lesson-id'>
 						<h4 className='list-group-item-heading'>{lesson.title}</h4>
 						<div className='post'>

@@ -2,8 +2,6 @@ import { take, put, all, fork } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 
-// import { authAxios } from '../../helpers/api'
-
 export const moduleNameSet = 'resetpsw'
 
 export const FORGOT_PASSWORD = `FORGOT_PASSWORD`
@@ -16,7 +14,6 @@ export const RESET_PASSWORD_FAILURE = `RESET_PASSWORD_FAILURE`
 
 const INITIAL_STATE = {
 	resetPassword: null,
-
 	error: null,
 }
 
