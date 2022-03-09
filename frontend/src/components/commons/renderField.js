@@ -7,12 +7,12 @@ const renderField = ({
 	autoComplete,
 	meta: { touched, error, invalid, warning },
 }) => (
-	<div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
-		<label className='control-label'>{label} </label>
+	<div className={`regist-form-group ${touched && invalid ? 'has-error' : ''}`}>
+		<label className='floatLabel'>{label} </label>
 		<div>
 			<input
 				{...input}
-				className='form-control'
+				className='regist-form__input'
 				placeholder={label}
 				type={type}
 				autoComplete={autoComplete}

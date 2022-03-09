@@ -4,29 +4,24 @@ import { Link } from 'react-router-dom'
 import { getImageByKey } from '../../utils/getImageByKey'
 
 const ArticleItem = ({ article }) => (
-	<>
-		<div className='row header'>
-			<div className='col-lg-1'>
-				<Link to={`article/${article.slug}`}>
-					<img
-						className='img-logo'
-						src={getImageByKey(article.type)}
-						alt='logo'
-					/>
-				</Link>
-			</div>
-			<div className='col-lg-11'>
-				<li key={article._id}>
-					<Link style={{ color: 'blue' }} to={`article/${article.slug}`}>
-						<h6 className='list-group-item-heading'>{article.title}</h6>
-					</Link>
-
-					{article.titleShort + article.type}
-				</li>
-			</div>
+	<div className='main-row'>
+		<div className='main-row__img'>
+			<Link to={`article/${article.slug}`}>
+				<img className='img-ico' src={getImageByKey(article.type)} alt='logo' />
+			</Link>
 		</div>
-		<hr />
-	</>
+		<div className='main-row-content'>
+			<li className='main-row__header' key={article._id}>
+				<Link to={`article/${article.slug}`}>
+					<h6>{article.title}</h6>
+				</Link>
+
+				<span className='main-row__text'>
+					{article.titleShort + article.type}
+				</span>
+			</li>
+		</div>
+	</div>
 )
 
 export default ArticleItem

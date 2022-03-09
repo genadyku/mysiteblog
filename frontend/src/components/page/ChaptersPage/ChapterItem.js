@@ -5,7 +5,7 @@ import LessonList from './LessonList'
 
 const ChapterItem = ({ chapter: { chapter1, _id, slug }, lessons }) => (
 	<div>
-		<li className='sidebar-nav-link' key={_id}>
+		<li className='lessons-nav-link' key={_id}>
 			<Link to={`/chapter/${slug}`}>{chapter1}</Link>
 		</li>
 		<LessonList lessons={lessons} />

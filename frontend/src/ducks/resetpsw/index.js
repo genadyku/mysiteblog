@@ -32,7 +32,6 @@ export default (state = INITIAL_STATE, action) => {
 				error: null,
 			}
 		case FORGOT_PASSWORD_FAILURE:
-			console.log('red1', action.payload.error.statusCode)
 			return {
 				...state,
 				resetPassword: false,

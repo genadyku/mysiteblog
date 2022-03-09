@@ -24,8 +24,8 @@ import AddArticlePage from '../components/page/AddArticlePage'
 import AddLessonPage from '../components/page/addLessonPage'
 import EditArticlesPage from '../components/page/EditArticlesPage'
 import UpdateArticlePage from '../components/page/UpdateArticlePage'
-
-import FooterPage from '../components/page/FooterPage'
+import NotFound from '../components/commons/NotFound'
+// import FooterPage from '../components/page/FooterPage'
 // import styles from '../../style/index.css'
 
 const routes = (
@@ -51,8 +51,8 @@ const routes = (
 			<Route exact path='/editArticles' component={EditArticlesPage} />
 			<Route exact path='/addLesson' component={AddLessonPage} />
 			<Route exact path='/updateArticle/:slug' component={UpdateArticlePage} />
+			<Route component={NotFound} />
 		</Switch>
-		<FooterPage />
 	</>
 )
 

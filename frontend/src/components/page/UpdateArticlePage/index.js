@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { fetchArticleId } from '../../../ducks/articles'
 import UpdateArticleForm from './UpdateArticleForm'
+import spinner from '../../spinner.gif'
 
 const UpdateArticlePage = ({
 	match,
@@ -22,14 +23,17 @@ const UpdateArticlePage = ({
 		<div className='container' style={styles}>
 			<div className='row'>
 				<div className='col-lg-5 col-md-7 mx-auto'>
-					<h3 className='text-center mb-3'>Редактироваь статью</h3>
-					<h5>{post.title}</h5>
+					<h3 className='text-center mb-3'>Редактировать статью</h3>
 					<UpdateArticleForm post={post} />
 				</div>
 			</div>
 		</div>
 	) : (
-		<div>loading</div>
+		<div className='container'>
+			<div className='row'>
+				<img src={spinner} alt='Loading...' />
+			</div>
+		</div>
 	)
 }
 

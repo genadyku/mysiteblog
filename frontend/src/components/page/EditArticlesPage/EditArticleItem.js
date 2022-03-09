@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -41,8 +40,8 @@ class EditArticleItem extends Component {
 							{article.titleShort + article.type}
 						</li>
 					</div>
-					{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-					<div className='btnedit edit'>
+
+					<div className='btnedit edit' role='presentation'>
 						<Link
 							style={{ color: 'blue' }}
 							to={`updateArticle/${article.slug}`}
@@ -51,8 +50,12 @@ class EditArticleItem extends Component {
 							<i className='fa fa-pen' />
 						</Link>
 					</div>
-					{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-					<div className='btnedit delete ' onClick={this.handleDetele}>
+
+					<div
+						className='btnedit delete '
+						onClick={this.handleDetele}
+						role='presentation'
+					>
 						<i className='fa fa-trash'> </i>
 					</div>
 				</div>

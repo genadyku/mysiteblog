@@ -1,30 +1,48 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import ArticleList from './ArticleList'
-
+import Error from '../../utils/Error'
 import { fetchAllArticles } from '../../../ducks/articles'
-import spinner from '../../spinner.gif'
+// import spinner from '../../spinner.gif'
 
-const ArticlesPage = ({ articles: { posts, loading }, fetchAllArticles }) => {
+const ArticlesPage = ({
+	articles: { posts, loading, error },
+	fetchAllArticles,
+}) => {
 	const search = location.search.substring(location.search.indexOf('=') + 1)
-
+	console.log('search:', search)
 	useEffect(() => {
 		fetchAllArticles(search)
 	}, [fetchAllArticles, search])
 
-	return loading ? (
-		<div className='container'>
-			<div className='row'>
-				<img src={spinner} alt='Loading...' />
+	function renderPage(posts, loading, error) {
+		if (!loading && posts !== null) {
+			return <ArticleList articles={posts} />
+		}
+		if (error) {
+			console.log('err:', error)
+			return <Error text={error.message} code={error.statusCode} />
+		}
+
+		return (
+			<div className='wraper'>
+				<main className='main'>
+					<div className='main-row'>
+						<div className='spiner-img' />
+						<div className='spiner-contents'>
+							<ul>
+								<li />
+								<li />
+							</ul>
+						</div>
+						{/* <div className='loadingspinner' /> */}
+					</div>
+				</main>
 			</div>
-		</div>
-	) : (
-		<section>
-			<div className='container '>
-				<ArticleList articles={posts} />
-			</div>
-		</section>
-	)
+		)
+	}
+
+	return renderPage(posts, loading, error)
 }
 
 function mapStateToProps(state) {

@@ -26,55 +26,47 @@ class SignupForm extends Component {
 		const { handleSubmit } = this.props
 		const { error } = this.props.errorMessage
 		return (
-			<div className='container'>
-				<form onSubmit={handleSubmit(this.onSubmit)}>
-					<Field
-						name='username'
-						type='text'
-						component={renderField}
-						label='Логин*'
-					/>
+			<form onSubmit={handleSubmit(this.onSubmit)}>
+				<Field
+					name='username'
+					type='text'
+					component={renderField}
+					label='Логин*'
+				/>
 
-					<Field
-						name='email'
-						type='email'
-						component={renderField}
-						label='Email*'
-					/>
-					<Field
-						name='password'
-						type='password'
-						component={renderField}
-						label='Пароль*'
-						autoComplete='off'
-					/>
-					<div className='enter'>
-						<div className='row'>
-							<div className='col-8'>
-								<button type='submit' className='btn btn-primary'>
-									Вход
-								</button>
-								<Link to='/' className='btn btn-error'>
-									{' '}
-									Отмена
-								</Link>
-							</div>
-							<div className='col-4'>
-								<Link to='/forgot' className='btn btn-error'>
-									{' '}
-									Забыли пароль
-								</Link>
-							</div>
-						</div>
-					</div>
+				<Field
+					name='email'
+					type='email'
+					component={renderField}
+					label='Email*'
+				/>
+				<Field
+					name='password'
+					type='password'
+					component={renderField}
+					label='Пароль*'
+					autoComplete='off'
+				/>
+				<div className='main-row'>
+					<button type='submit' className='regist-form__button'>
+						Вход
+					</button>
+					<Link to='/' className='regist-form__nav'>
+						{' '}
+						Отмена
+					</Link>
+					<Link to='/forgot' className='regist-form__nav cansel'>
+						{' '}
+						Забыли пароль
+					</Link>
+				</div>
 
-					<div>
-						{error && error.message && (
-							<div style={divStyle}>{error.message}</div>
-						)}
-					</div>
-				</form>
-			</div>
+				<div>
+					{error && error.message && (
+						<div style={divStyle}>{error.message}</div>
+					)}
+				</div>
+			</form>
 		)
 	}
 }

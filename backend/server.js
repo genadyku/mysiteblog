@@ -4,7 +4,7 @@ const app = require('./app');
 
 dotenv.config({ path: './config.env' });
 mongoose.set('useCreateIndex', true);
-console.log('MONGO_URI:',process.env.MONGO_URI)
+
 mongoose
   .connect(process.env.MONGO_URI, {
     useFindAndModify: false,

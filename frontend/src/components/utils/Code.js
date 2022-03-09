@@ -15,9 +15,7 @@ const Code = ({ text }) => {
 	const createMarkup = (text) => ({ __html: text })
 
 	return (
-		<div>
-			<div dangerouslySetInnerHTML={createMarkup(text1)} />
-		</div>
+		<div className='post-code' dangerouslySetInnerHTML={createMarkup(text1)} />
 	)
 }
 

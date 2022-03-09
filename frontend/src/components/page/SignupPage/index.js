@@ -2,13 +2,17 @@ import React from 'react'
 import SignupForm from '../../commons/SignupForm'
 
 const SignupPage = () => (
-	<div className='container'>
-		<div className='row header'>
-			<div className='col-lg-5 col-md-7 mx-auto'>
-				<h3 className='text-center mb-3'>Регистрация</h3>
-				<SignupForm />
+	<div className='wraper'>
+		<main className='main'>
+			<div className='main-row'>
+				<div className='wraper-center'>
+					<div className='wraper-center-item'>
+						<h3>Регистрация</h3>
+						<SignupForm />
+					</div>
+				</div>
 			</div>
-		</div>
+		</main>
 	</div>
 )
 

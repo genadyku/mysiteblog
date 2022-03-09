@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import SidebarPage from './SidebarPage'
+import SidebarPage from '../SidebarPage'
 
 import TitleLessonList from './TitleLessonList'
 import Error from '../../utils/Error'
@@ -10,6 +10,7 @@ import { fetchTitleLessons } from '../../../ducks/lesson'
 const AppLessonsPage = ({
 	match,
 	title: { title, loading, error },
+	chapters,
 	fetchTitleLessons,
 }) => {
 	const { slug } = match.params
@@ -17,33 +18,42 @@ const AppLessonsPage = ({
 		fetchTitleLessons(slug)
 	}, [fetchTitleLessons, slug])
 
-	return loading && title._id ? (
-		<div className='container-fluid'>
-			<div className='row'>
-				<div className='col col-lg-2'>
-					<SidebarPage
-						chapter_id={title._id}
-						chapter_slug={title.slug}
-						chapter1={title.chapter1}
-					/>
+	const renderPage = (title, loading, error) => {
+		if (!loading || title == null) {
+			return (
+				<div className='wraper'>
+					<main className='main'>
+						<div className='main-row'>
+							<div className='loadingspinner' />
+						</div>
+					</main>
 				</div>
-				<div className='col col-lg-10'>
-					<TitleLessonList chapters={title} />
+			)
+		}
+		if (error) {
+			return <Error text={error.message} code={error.statusCode} />
+		}
+
+		return (
+			<div className='wraper'>
+				<div className='chapter'>
+					<div className='main-row'>
+						<div className='sidebar'>
+							<SidebarPage chapter1={chapters} />
+						</div>
+						<TitleLessonList chapters={title} />
+					</div>
 				</div>
 			</div>
-		</div>
-	) : (
-		<div className='container'>
-			<div className='row'>
-				{error && <Error text={error.message} code={error.error.statusCode} />}
-			</div>
-		</div>
-	)
+		)
+	}
+	return renderPage(title, loading, error)
 }
 
 function mapStateToProps(state) {
 	return {
 		title: state.lesson,
+		chapters: state.lesson.lessons,
 	}
 }
 

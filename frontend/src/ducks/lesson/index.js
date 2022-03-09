@@ -66,7 +66,6 @@ export default function reducer(state = initialState, action) {
 				},
 			}
 		case CHAPTERS_SUCCESS:
-			console.log('red1', action.payload)
 			return {
 				...state,
 				lessons: {
@@ -85,43 +84,45 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				lessons: [],
-				loading: false,
+				loading: true,
 				error: null,
 			}
 		case LESSONS_SUCCESS:
 			return {
 				...state,
 				lessons: action.payload,
-				loading: true,
+				loading: false,
 				error: null,
 			}
 
 		case LESSONS_FAILURE:
 			return {
 				...state,
-				loading: true,
+				loading: false,
 				error: {},
 			}
 		case LESSON_REQUEST:
 			return {
 				...state,
 				lesson: null,
-				loading: false,
+				loading: true,
 				error: null,
 			}
 		case LESSON_SUCCESS:
 			return {
 				...state,
 				lesson: action.payload,
-				loading: true,
+				loading: false,
 				error: null,
 			}
 		case LESSON_FAILURE:
 			error = payload
+			console.log('err:', error)
+
 			return {
 				...state,
 				lesson: null,
-				loading: true,
+				loading: false,
 				error,
 			}
 		case TITLE_REQUEST:
@@ -350,6 +351,37 @@ function fetchLessonId(id) {
 	return axios.get(`http://localhost:4001/api/lesson/${id}/edit`)
 }
 
+export const fetchChapters = () =>
+	axios
+		.get('/api/chapter', {
+			headers: [],
+		})
+		.then((response) => response.data)
+
+export function fetchChaptersSuccess(chapters) {
+	return {
+		type: CHAPTERS_SUCCESS,
+		payload: chapters,
+	}
+}
+
+export function fetchChaptersFailure(error) {
+	return {
+		type: CHAPTERS_FAILURE,
+		payload: error,
+	}
+}
+
+const getChapters = function* () {
+	try {
+		const resp = yield call(fetchChapters)
+
+		yield put(fetchChaptersSuccess(resp))
+	} catch (error) {
+		yield put({ type: CHAPTERS_FAILURE, payload: error })
+	}
+}
+
 export const fetchLessonIdSaga = function* () {
 	while (true) {
 		try {
@@ -367,6 +399,7 @@ export const fetchTitleLessonsSlugSaga = function* () {
 	while (true) {
 		try {
 			const action = yield take(TITLE_REQUEST)
+			yield call(getChapters)
 			const resp = yield call(fetchTitleLesson, action.payload.slug)
 			yield put(fetchTitleLessonsSuccess(resp.data))
 		} catch (err) {
@@ -434,13 +467,6 @@ export const deleteLessonSaga = function* () {
 	}
 }
 
-export const fetchChapters = () =>
-	axios
-		.get('/api/chapter', {
-			headers: [],
-		})
-		.then((response) => response.data)
-
 export const fetchLessons = () =>
 	axios
 		.get(`api/lessons`, {
@@ -506,26 +532,13 @@ export const fetchLessonsSaga = function* () {
 	}
 }
 
-export function fetchChaptersSuccess(chapters) {
-	return {
-		type: CHAPTERS_SUCCESS,
-		payload: chapters,
-	}
-}
-
-export function fetchChaptersFailure(error) {
-	return {
-		type: CHAPTERS_FAILURE,
-		payload: error,
-	}
-}
-
 export const fetchChaptersSaga = function* () {
 	while (true) {
 		try {
 			yield take(CHAPTERS_REQUEST)
+			yield call(getChapters)
 			const resp = yield call(fetchChapters)
-			console.log('CHAPTERS_REQUEST', resp)
+
 			yield put(fetchChaptersSuccess(resp))
 		} catch (error) {
 			yield put({ type: CHAPTERS_FAILURE, payload: error })
@@ -537,6 +550,7 @@ export const fetchLessonSlugSaga = function* () {
 	while (true) {
 		try {
 			const action = yield take(LESSON_REQUEST)
+			//	yield call(getChapters)
 			const resp = yield call(fetchLesson, action.payload.slug)
 			yield put(fetchLessonSuccess(resp.data))
 		} catch (err) {

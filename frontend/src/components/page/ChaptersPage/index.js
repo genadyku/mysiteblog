@@ -2,33 +2,29 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import ChapterList from './ChapterList'
 
-import spinner from '../../spinner.gif'
-
 import { fetchAllLessons } from '../../../ducks/lesson'
 
 const ChaptersPage = ({ lessons: { lessons, loading }, fetchAllLessons }) => {
 	useEffect(() => {
 		fetchAllLessons()
-		console.log('less-fenth:')
 	}, [fetchAllLessons])
 
-	return loading && lessons && lessons.length > 0 ? (
-		<section>
-			<div className='container'>
-				<div className='row'>
-					<div className='lesson-content'>
-						<h4>Язык программирования JavaScript</h4>
-						<div className='frontpage-content__part'>Часть первая</div>
-						<ChapterList lessons={lessons} />
-					</div>
+	return !loading && lessons && lessons.length > 0 ? (
+		<div className='wraper'>
+			<main className='main'>
+				<div className='lesson'>
+					<h4 className='lesson-part'>Язык программирования JavaScript</h4>
+					<ChapterList lessons={lessons} />
 				</div>
-			</div>
-		</section>
+			</main>
+		</div>
 	) : (
-		<div className='container'>
-			<div className='row'>
-				<img src={spinner} alt='Loading...' />
-			</div>
+		<div className='wraper'>
+			<main className='main'>
+				<div className='main-row'>
+					<div className='spinner' />
+				</div>
+			</main>
 		</div>
 	)
 }

@@ -61,23 +61,23 @@ export default function reducer(state = INITIAL_STATE, action) {
 				...state,
 				posts: [],
 				loading: true,
-				error: payload,
+				error: null,
 			}
 		case FETCH_ARTICLES_SUCCESS:
 			return {
 				...state,
-
 				posts: payload.articles,
-				error: null,
 				loading: false,
+				error: null,
 			}
 		case FETCH_ARTICLES_FAILURE:
 			error = payload
+
 			return {
 				...state,
 				posts: null,
-				error,
 				loading: false,
+				error,
 			}
 
 		case UPDATE_ARTICLE_SUCCESS:
@@ -155,6 +155,14 @@ export const updateArticle = function (data) {
 		payload: data,
 	}
 }
+/*
+export const fetchArticles = () =>
+	axios
+		.get(`/api/articles`, {
+			headers: [],
+		})
+		.then((response) => response.data)
+		*/
 
 export const fetchArticles = (keyword) =>
 	axios
@@ -162,6 +170,7 @@ export const fetchArticles = (keyword) =>
 			headers: [],
 		})
 		.then((response) => response.data)
+
 export function fetchArticlesSuccess(articles) {
 	return {
 		type: FETCH_ARTICLES_SUCCESS,
@@ -180,7 +189,9 @@ export const fetchArticlesSaga = function* () {
 	while (true) {
 		try {
 			const action = yield take(FETCH_ARTICLES)
+			console.log('000:', action.payload)
 			const resp = yield call(fetchArticles, action.payload.keyword)
+			console.log('resp:', resp)
 			yield put(fetchArticlesSuccess(resp.data))
 		} catch (error) {
 			yield put({ type: FETCH_ARTICLES_FAILURE, payload: error })
@@ -188,6 +199,20 @@ export const fetchArticlesSaga = function* () {
 	}
 }
 
+/*
+export const fetchArticlesSaga = function* () {
+	while (true) {
+		try {
+			yield take(FETCH_ARTICLES)
+			const resp = yield call(fetchArticles)
+
+			yield put(fetchArticlesSuccess(resp.data))
+		} catch (err) {
+			yield put({ type: FETCH_ARTICLES_FAILURE, payload: err.response.data })
+		}
+	}
+}
+*/
 function fetchArticle(slug) {
 	return axios.get(`/api/article/${slug}`)
 }

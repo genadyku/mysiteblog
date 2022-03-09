@@ -1,10 +1,5 @@
 import React, { useState } from 'react'
 
-const divStyle = {
-	color: '#d9534f',
-	width: '400px',
-	marginRight: '100px',
-}
 const SearchBox = ({ history }) => {
 	const [keyword, setKeyword] = useState('')
 	const submitHandler = (e) => {
@@ -19,23 +14,18 @@ const SearchBox = ({ history }) => {
 		}
 	}
 	return (
-		<div className='input-group' style={divStyle}>
+		<form className='search'>
 			<input
-				type='text'
-				className='form-control'
-				placeholder='Поиск по сайту'
+				className='search__input'
+				type='search'
+				placeholder='Поиск'
+				aria-label='Поиск'
 				onChange={(e) => setKeyword(e.target.value)}
 			/>
-			<div className='input-group-append'>
-				<button
-					className='btn btn-secondary'
-					type='button'
-					onClick={submitHandler}
-				>
-					<i className='fa fa-search' />
-				</button>
-			</div>
-		</div>
+			<button className='search__button' type='submit' onClick={submitHandler}>
+				Поиск
+			</button>
+		</form>
 	)
 }
 

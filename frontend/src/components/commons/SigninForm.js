@@ -26,41 +26,37 @@ class SigninForm extends Component {
 		const { handleSubmit } = this.props
 
 		return (
-			<div className='container'>
-				<form onSubmit={handleSubmit(this.onSubmit)}>
-					<Field
-						name='email'
-						type='text'
-						component={renderField}
-						label='Имя пользователя*'
-					/>
-					<Field
-						name='password'
-						type='password'
-						component={renderField}
-						label='Пароль*'
-						autoComplete='off'
-					/>
-					<div className='row'>
-						<div className='col-8'>
-							<button type='submit' className='btn btn-primary'>
-								Вход
-							</button>
-							<Link to='/' className='btn btn-error'>
-								{' '}
-								Отмена
-							</Link>
-						</div>
-						<div className='col-4'>
-							<Link to='/forgot' className='btn btn-error'>
-								{' '}
-								Забыли пароль
-							</Link>
-						</div>
-					</div>
-					<div>{error && <div style={divStyle}>{error.message}</div>}</div>
-				</form>
-			</div>
+			<form onSubmit={handleSubmit(this.onSubmit)}>
+				<Field
+					name='email'
+					type='text'
+					component={renderField}
+					label='Имя пользователя*'
+				/>
+				<Field
+					name='password'
+					type='password'
+					component={renderField}
+					label='Пароль*'
+					autoComplete='off'
+				/>
+				<div className='main-row'>
+					<button type='submit' className='regist-form__button'>
+						Вход
+					</button>
+					<Link to='/' className='regist-form__nav'>
+						{' '}
+						Отмена
+					</Link>
+
+					<Link to='/forgot' className='regist-form__nav cansel'>
+						{' '}
+						Забыли пароль
+					</Link>
+				</div>
+
+				<div>{error && <div style={divStyle}>{error.message}</div>}</div>
+			</form>
 		)
 	}
 }
