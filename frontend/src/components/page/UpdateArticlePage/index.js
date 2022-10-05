@@ -10,23 +10,23 @@ const UpdateArticlePage = ({
 	fetchArticleId,
 	article: { post, loading },
 }) => {
-	const styles = {
-		marginTop: '20px',
-	}
-
 	const { slug } = match.params
 	useEffect(() => {
 		fetchArticleId(slug)
 	}, [fetchArticleId, slug])
 
 	return !loading && post ? (
-		<div className='container' style={styles}>
-			<div className='row'>
-				<div className='col-lg-5 col-md-7 mx-auto'>
-					<h3 className='text-center mb-3'>Редактировать статью</h3>
-					<UpdateArticleForm post={post} />
+		<div className='wraper'>
+			<main className='main'>
+				<div className='main-row'>
+					<div className='wraper-left'>
+						<div className='wraper-update'>
+							<h3>Редактировать статью</h3>
+							<UpdateArticleForm post={post} />
+						</div>
+					</div>
 				</div>
-			</div>
+			</main>
 		</div>
 	) : (
 		<div className='container'>

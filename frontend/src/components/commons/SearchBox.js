@@ -17,9 +17,7 @@ const SearchBox = ({ history }) => {
 		<form className='search'>
 			<input
 				className='search__input'
-				type='search'
 				placeholder='Поиск'
-				aria-label='Поиск'
 				onChange={(e) => setKeyword(e.target.value)}
 			/>
 			<button className='search__button' type='submit' onClick={submitHandler}>

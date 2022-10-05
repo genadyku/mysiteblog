@@ -4,7 +4,6 @@ import { reduxForm, Field } from 'redux-form'
 import { Link } from 'react-router-dom'
 
 import renderField from './renderField'
-// import { forgot } from '../../ducks/auth'
 import { forgot } from '../../ducks/resetpsw'
 
 const divStyle = {
@@ -23,42 +22,34 @@ class ForgotForm extends Component {
 	}
 
 	render() {
-		const { handleSubmit, submitting } = this.props
+		const { handleSubmit /* , submitting */ } = this.props
 
 		const { error } = this.props.errorMessage
 
 		return (
-			<div className='container'>
-				<form onSubmit={handleSubmit(this.onSubmit)}>
-					<Field
-						name='email'
-						type='text'
-						component={renderField}
-						label='E-mail*'
-					/>
+			<form onSubmit={handleSubmit(this.onSubmit)}>
+				<Field
+					name='email'
+					type='text'
+					component={renderField}
+					label='E-mail*'
+				/>
+				<div className='main-row'>
+					<button type='submit' className='regist-form__button'>
+						Вход
+					</button>
+					<Link to='/' className='regist-form__nav'>
+						{' '}
+						Отмена
+					</Link>
+				</div>
 
-					<div className='row'>
-						<div className='col-8'>
-							<button
-								type='submit'
-								className='btn btn-primary'
-								disabled={submitting}
-							>
-								Вход
-							</button>
-							<Link to='/' className='btn btn-error'>
-								{' '}
-								Отмена
-							</Link>
-						</div>
-					</div>
-					<div>
-						{error && error.message && (
-							<div style={divStyle}>{error.message}</div>
-						)}
-					</div>
-				</form>
-			</div>
+				<div>
+					{error && error.message && (
+						<div style={divStyle}>{error.message}</div>
+					)}
+				</div>
+			</form>
 		)
 	}
 }

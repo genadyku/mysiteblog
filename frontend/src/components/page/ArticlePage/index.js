@@ -8,8 +8,6 @@ import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-sql'
 import 'prismjs/plugins/line-numbers/prism-line-numbers'
 
-// import spinner from '../../spinner.gif'
-
 const ArticlePage = ({
 	match,
 	article: { post, loading, error },
@@ -29,6 +27,7 @@ const ArticlePage = ({
 					<main className='main'>
 						<div className='main-row'>
 							<div className='post'>
+								<h4>{post.title}</h4>
 								<span className='main-row__text'>{post.titleShort}</span>
 								<Code text={post.textf} />
 							</div>

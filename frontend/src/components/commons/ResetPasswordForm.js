@@ -26,32 +26,28 @@ class ResetPasswordForm extends Component {
 		const { handleSubmit } = this.props
 
 		return (
-			<div className='container'>
-				<form onSubmit={handleSubmit(this.onSubmit)}>
-					<Field
-						name='passwordnew'
-						type='password'
-						component={renderField}
-						label='Пароль*'
-						autoComplete='off'
-					/>
-					<Field
-						name='password2'
-						type='password'
-						component={renderField}
-						label='Пароль*'
-						autoComplete='off'
-					/>
+			<form onSubmit={handleSubmit(this.onSubmit)}>
+				<Field
+					name='passwordnew'
+					type='password'
+					component={renderField}
+					label='Пароль*'
+					autoComplete='off'
+				/>
+				<Field
+					name='password2'
+					type='password'
+					component={renderField}
+					label='Пароль*'
+					autoComplete='off'
+				/>
 
-					<div className='row'>
-						<div className='col-8'>
-							<button type='submit' className='btn btn-primary'>
-								Вход
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
+				<div className='main-row'>
+					<button type='submit' className='regist-form__button'>
+						Вход
+					</button>
+				</div>
+			</form>
 		)
 	}
 }

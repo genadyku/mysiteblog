@@ -19,6 +19,13 @@ const Navigation = ({ isAuthenticated, name, logout }) => (
 			<li>
 				<Link to='/lessons'>Уроки</Link>
 			</li>
+			<div className='dropdown dropdown2'>
+				<h4 className='dropbtn'>Админка</h4>
+				<div className='dropdown-content'>
+					<Link to='/editArticles'>Статьи</Link>
+					<Link to='/addLesson'>Уроки</Link>
+				</div>
+			</div>
 			<li>
 				{isAuthenticated && (
 					<Link className='nav-link' to='/reacts'>
@@ -46,80 +53,6 @@ const Navigation = ({ isAuthenticated, name, logout }) => (
 			</li>
 		</ul>
 	</header>
-
-	/*
-	<nav className='navbar  navbar-expand-md  navbar-dark    bg-info  nav '>
-		<div className='container-fluid'>
-			<Link className='navbar-brand' to='/'>
-				Home
-			</Link>
-
-			<button
-				className='navbar-toggler'
-				type='button'
-				data-bs-toggle='collapse'
-				data-bs-target='#navbarCollapse'
-				aria-controls='navbarCollapse'
-				aria-expanded='false'
-				aria-label='Toggle navigation'
-			>
-				<span className='navbar-toggler-icon' />
-			</button>
-			<div className='collapse navbar-collapse' id='navbarCollapse'>
-				<ul className='navbar-nav me-auto mb-2 mb-md-0'>
-					<li className='nav-item'>
-						<Link className='nav-link' to='/articles'>
-							Статьи
-						</Link>
-					</li>
-					<li className='nav-item'>
-						<Link className='nav-link' to='/lessons'>
-							Уроки
-						</Link>
-					</li>
-					<li className='nav-item'>
-						{isAuthenticated && (
-							<Link className='nav-link' to='/reacts'>
-								React
-							</Link>
-						)}
-					</li>
-					<NavDropdown name='Добавить'>
-						<Link className='dropdown-item' to='/addArticle'>
-							Добавить статью
-						</Link>
-						<Link className='dropdown-item' to='/editArticles'>
-							Редактировать статьи
-						</Link>
-						<Link className='dropdown-item' to='/addArticle'>
-							Добавить статью о REACT
-						</Link>
-						<Link className='dropdown-item' to='/addLesson'>
-							Добавить урок
-						</Link>
-					</NavDropdown>
-				</ul>
-				<ul className='navbar-nav navbar-right '>
-					<Route render={({ history }) => <SearchBox history={history} />} />
-					{isAuthenticated && <li className='list-name'>{name} </li>}
-					{!isAuthenticated && (
-						<Link className='nav-link' to='/signin'>
-							Вход
-						</Link>
-					)}
-					<Link className='nav-link' to='/signup'>
-						Регистрация
-					</Link>
-					{isAuthenticated && (
-						<Link className='nav-link' to='/' onClick={logout}>
-							Выход
-						</Link>
-					)}
-				</ul>
-			</div>
-		</div>
-	</nav>
-					*/
 )
 
 export default connect(null, { logout })(Navigation)

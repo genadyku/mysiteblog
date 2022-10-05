@@ -20,63 +20,54 @@ const UpdateArticleForm = ({ post, updateArticle }) => {
 	const { title, titleShort, slug, textf } = edtarticle
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div className='form-group'>
+		<div className='upd-article'>
+			<form onSubmit={handleSubmit}>
 				<label>Название раздела* </label>
 				<input
 					type='text'
 					name='title'
-					className='form-control'
+					className='upd-article__input'
 					onChange={handleChange}
 					defaultValue={title}
 				/>
-			</div>
-			<div className='form-group'>
+
 				<label>Краткое описание раздела* </label>
 				<input
 					type='text'
 					name='titleShort'
-					className='form-control'
+					className='upd-article__input'
 					onChange={handleChange}
 					defaultValue={titleShort}
 				/>
-			</div>
-			<div className='form-group'>
+
 				<label>Ссылка*</label>
 				<input
 					type='text'
 					name='slug'
-					className='form-control'
+					className='upd-article__input'
 					onChange={handleChange}
 					defaultValue={slug}
 				/>
-			</div>
 
-			<div className='form-group'>
-				<label>Ссылка*</label>
+				<label>Содержание*</label>
 				<textarea
-					cols='80'
+					cols='120'
 					rows='50'
 					name='textf'
 					onChange={handleChange}
 					defaultValue={textf}
 				/>
-			</div>
-
-			<div className='commit'>
-				<div className='row'>
-					<div className='col-8'>
-						<button type='submit' className='btn btn-primary'>
-							Сохранить
-						</button>
-						<Link to='/' className='btn btn-error'>
-							{' '}
-							Отмена
-						</Link>
-					</div>
+				<div className='main-row'>
+					<button type='submit' className='regist-form__button'>
+						Сохранить
+					</button>
+					<Link to='/' className='regist-form__nav'>
+						{' '}
+						Отмена
+					</Link>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	)
 }
 

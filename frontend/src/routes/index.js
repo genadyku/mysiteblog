@@ -24,6 +24,7 @@ import AddArticlePage from '../components/page/AddArticlePage'
 import AddLessonPage from '../components/page/addLessonPage'
 import EditArticlesPage from '../components/page/EditArticlesPage'
 import UpdateArticlePage from '../components/page/UpdateArticlePage'
+
 import NotFound from '../components/commons/NotFound'
 // import FooterPage from '../components/page/FooterPage'
 // import styles from '../../style/index.css'

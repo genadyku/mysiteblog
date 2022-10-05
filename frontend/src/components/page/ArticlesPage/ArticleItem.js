@@ -16,9 +16,7 @@ const ArticleItem = ({ article }) => (
 					<h6>{article.title}</h6>
 				</Link>
 
-				<span className='main-row__text'>
-					{article.titleShort + article.type}
-				</span>
+				<span className='main-row__text'>{article.titleShort}</span>
 			</li>
 		</div>
 	</div>

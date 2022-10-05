@@ -6,6 +6,7 @@ const sendVerificationEmail = (sender, recip, user, token, cb) => {
   const smtpTransport = nodemailer.createTransport({
     host: process.env.email_uri,
     port: process.env.email_port,
+    secure: true,
     auth: {
       user: process.env.aut_user,
       pass: process.env.aut_passw,
@@ -29,10 +30,12 @@ const sendVerificationEmail = (sender, recip, user, token, cb) => {
 };
 const sendUpdatePassw = (sender, recip, user, token, cb) => {
   const { host } = process.env;
+  
 
   const smtpTransport = nodemailer.createTransport({
     host: process.env.email_uri,
     port: process.env.email_port,
+    secure: true,
     auth: {
       user: process.env.aut_user,
       pass: process.env.aut_passw,

@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 
 import ResetPasswordForm from '../../commons/ResetPasswordForm'
 
-const styles = {
-	marginTop: '20px',
-}
-
 class ResetPasswordPage extends Component {
 	componentDidMount() {
 		//	const { token } = this.props.match.params
@@ -13,13 +9,17 @@ class ResetPasswordPage extends Component {
 
 	render() {
 		return (
-			<div className='container' style={styles}>
-				<div className='row'>
-					<div className='col-lg-5 col-md-7 mx-auto'>
-						<h3 className='text-center mb-3'>Смена пароля</h3>
-						<ResetPasswordForm {...this.props} />
+			<div className='wraper'>
+				<main className='main'>
+					<div className='main-row'>
+						<div className='wraper-center'>
+							<div className='wraper-center-item'>
+								<h3>Смена пароля</h3>
+								<ResetPasswordForm {...this.props} />
+							</div>
+						</div>
 					</div>
-				</div>
+				</main>
 			</div>
 		)
 	}

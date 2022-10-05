@@ -80,18 +80,14 @@ class AddArticeForm extends Component {
 						label='Содержание статьи'
 					/>
 
-					<div className='enter'>
-						<div className='row'>
-							<div className='col-8'>
-								<button type='submit' className='btn btn-primary'>
-									Сохранить
-								</button>
-								<Link to='/' className='btn btn-error'>
-									{' '}
-									Отмена
-								</Link>
-							</div>
-						</div>
+					<div className='main-row'>
+						<button type='submit' className='regist-form__button'>
+							Сохранить
+						</button>
+						<Link to='/' className='regist-form__nav'>
+							{' '}
+							Отмена
+						</Link>
 					</div>
 				</form>
 			</div>
